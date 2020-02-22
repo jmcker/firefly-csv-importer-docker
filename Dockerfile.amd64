@@ -11,8 +11,6 @@ ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/mas
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions intl bcmath opcache memcached
 
-    #install-php-extensions intl bcmath ldap gd pdo_pgsql pdo_sqlite pdo_mysql opcache memcached
-
 # common config
 RUN a2enmod rewrite && a2enmod ssl && \
 	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
