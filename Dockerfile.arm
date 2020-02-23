@@ -2,6 +2,9 @@ FROM arm32v7/php:7.3-apache-stretch
 
 COPY tmp/qemu-arm-static /usr/bin/qemu-arm-static
 
+ARG RELEASE=develop
+ENV RELEASE=$RELEASE
+
 ENV HOMEPATH=/var/www/html COMPOSER_ALLOW_SUPERUSER=1
 LABEL version="1.0" maintainer="thegrumpydictator@gmail.com"
 

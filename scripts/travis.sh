@@ -14,6 +14,7 @@ sudo service docker restart
 REPOS_NAME=jc5x/csv-importer # jc5x/firefly-iii
 
 
+
 # First build amd64 image:
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 

@@ -36,7 +36,6 @@ if [ "$WEB_SERVER" == "false" ]; then
 	echo "Will launch auto import on /import directory."
 	php artisan csv:auto-import /import
 else
-	echo "Will now run apache:"
+	echo "Will now run Apache web server:"
 	exec apache2-foreground
 fi
-
