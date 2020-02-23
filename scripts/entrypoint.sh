@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "Now in entrypoint.sh for Firefly III CSV importer"
+echo "Now in entrypoint.sh (v1.1) for Firefly III CSV importer."
+echo "Please wait for the container to start..."
 
 # make sure the correct directories exists (suggested by @chrif):
-echo "Making directories..."
 mkdir -p $HOMEPATH/storage/app/public
 mkdir -p $HOMEPATH/storage/build
 mkdir -p $HOMEPATH/storage/database
@@ -19,26 +19,27 @@ mkdir -p $HOMEPATH/storage/logs
 mkdir -p $HOMEPATH/storage/upload
 
 # make sure we own the volumes:
-echo "Run chown on storage..."
 chown -R www-data:www-data -R $HOMEPATH/storage
-echo "Run chmod on storage..."
 chmod -R 775 $HOMEPATH/storage
 
 # remove any lingering files that may break upgrades:
-echo "Remove log file..."
 rm -f $HOMEPATH/storage/logs/laravel.log
 
-echo "Dump auto load..."
-composer dump-autoload
-echo "Discover packages..."
-php artisan package:discover
+# some test commands:
+ip a | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | grep 172.17
 
-echo "Run various artisan commands..."
-php artisan cache:clear
-php artisan config:cache
 
-echo "Run chown"
+composer dump-autoload > /dev/null 2>&1
+php artisan package:discover > /dev/null 2>&1
+php artisan cache:clear > /dev/null 2>&1
+php artisan config:cache > /dev/null 2>&1
 chown -R www-data:www-data -R $HOMEPATH
 
-echo "Go!"
-exec apache2-foreground
+if [ "$WEB_SERVER" == "false" ]; then
+	echo "Will launch auto import on /import directory."
+	php artisan csv:auto-import /import
+else
+	echo "Will now run apache:"
+	exec apache2-foreground
+fi
+

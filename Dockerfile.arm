@@ -28,7 +28,7 @@ COPY scripts/site.conf /etc/apache2/sites-available/000-default.conf
 # install Firefly III CSV Importer and patch configuration
 WORKDIR $HOMEPATH
 
-RUN curl -SL https://github.com/firefly-iii/csv-importer/archive/master.tar.gz | tar xzC $HOMEPATH --strip-components 1 && chown -R www-data:www-data $HOMEPATH && \
+RUN curl -SL https://github.com/firefly-iii/csv-importer/archive/$RELEASE.tar.gz | tar xzC $HOMEPATH --strip-components 1 && chown -R www-data:www-data $HOMEPATH && \
     chmod -R 775 $HOMEPATH/storage && \
     composer install --prefer-dist --no-dev --no-scripts --no-suggest
 
