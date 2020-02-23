@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Now in entrypoint.sh (v1.1) for Firefly III CSV importer."
+echo "Now in entrypoint.sh (v1.2) for Firefly III CSV importer."
 echo "Please wait for the container to start..."
 
 # make sure the correct directories exists (suggested by @chrif):
@@ -25,15 +25,12 @@ chmod -R 775 $HOMEPATH/storage
 # remove any lingering files that may break upgrades:
 rm -f $HOMEPATH/storage/logs/laravel.log
 
-# some test commands:
-ip a | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | grep 172.17
-
-
 composer dump-autoload > /dev/null 2>&1
 php artisan package:discover > /dev/null 2>&1
 php artisan cache:clear > /dev/null 2>&1
 php artisan config:cache > /dev/null 2>&1
 chown -R www-data:www-data -R $HOMEPATH
+php artisan csv:version
 
 if [ "$WEB_SERVER" == "false" ]; then
 	echo "Will launch auto import on /import directory."
