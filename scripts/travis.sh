@@ -11,7 +11,7 @@ sudo service docker restart
 
 # easy switch between test and pr repository.
 #REPOS_NAME=jc5x/ff-test-builds # jc5x/firefly-iii
-REPOS_NAME=jc5x/csv-importer # jc5x/firefly-iii
+REPOS_NAME=fireflyiii/csv-importer # jc5x/firefly-iii
 
 
 

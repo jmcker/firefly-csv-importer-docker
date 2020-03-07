@@ -12,7 +12,7 @@ Here are some links for your reading pleasure.
 
 - [Firefly III on GitHub](https://github.com/firefly-iii/firefly-iii)
 - [CSV Importer Documentation](https://firefly-iii.gitbook.io/firefly-iii-csv-importer/)
-- [Firefly III CSV Importer on Docker Hub](https://hub.docker.com/r/jc5x/csv-importer)
+- [Firefly III CSV Importer on Docker Hub](https://hub.docker.com/r/fireflyiii/csv-importer)
 - [Firefly III on Travis CI](https://travis-ci.com/firefly-iii/csv-importer-docker)
 
 Please open any issues you have [in the main repository](https://github.com/firefly-iii/firefly-iii).

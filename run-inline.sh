@@ -26,4 +26,4 @@ docker run \
 -e FIREFLY_III_ACCESS_TOKEN=$PERSONAL_ACCESS_TOKEN \
 -e FIREFLY_III_URI=$FIREFLY_III_URI \
 -e WEB_SERVER=false \
-jc5x/csv-importer:develop
+fireflyiii/csv-importer:develop
