@@ -1,28 +1,9 @@
-FROM php:7.3-apache
-
-ENV HOMEPATH=/var/www/html COMPOSER_ALLOW_SUPERUSER=1
-LABEL version="1.0" maintainer="thegrumpydictator@gmail.com"
+FROM fireflyiii/tools-base-image:latest-arm64
+# To learn more about this base image, visit https://github.com/firefly-iii/tools-base-image
 
 ARG RELEASE=develop
-ENV RELEASE=$RELEASE
-
-RUN apt-get update && apt-get install -y unzip && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# PHP extensions.
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
-
-RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions intl bcmath opcache memcached
-
-    #install-php-extensions intl bcmath ldap gd pdo_pgsql pdo_sqlite pdo_mysql opcache memcached
-
-# common config
-RUN a2enmod rewrite && a2enmod ssl && \
-	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-	composer global require hirak/prestissimo --no-plugins --no-scripts && \
-	mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
-    sed -i 's/max_execution_time = 30/max_execution_time = 600/' /usr/local/etc/php/php.ini && \
-    sed -i 's/memory_limit = 128M/memory_limit = 512M/' /usr/local/etc/php/php.ini
+ENV HOMEPATH=/var/www/html COMPOSER_ALLOW_SUPERUSER=1
+LABEL version="1.0" maintainer="thegrumpydictator@gmail.com"
 
 COPY scripts/site.conf /etc/apache2/sites-available/000-default.conf
 
