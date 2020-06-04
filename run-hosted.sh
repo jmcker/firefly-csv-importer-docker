@@ -21,4 +21,4 @@ docker run \
 -e FIREFLY_III_ACCESS_TOKEN=$PERSONAL_ACCESS_TOKEN \
 -e FIREFLY_III_URI=$FIREFLY_III_URI \
 -p 8081:80 \
-fireflyiii/csv-importer:develop
+fireflyiii/csv-importer:latest
